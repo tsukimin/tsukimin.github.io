@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="King">
+    
+    <meta name="description" content="你好,我的名字叫my king 21岁 家在山东省菏泽市 目前在山东省济南市北京易数模法科技有限公司做软件开发,每天都会学习一点新知识，也会朝着更好的发展去进步，我不抽烟不喝酒，所以身体素质还可以，相信每一天的进步都会激励着我，朝着更好的发展去进步，人生格言 积极向上 不苟活于现在 以后的每一天这里相见">
+    
+    
+    
+    
+    
+    
+    <title>linux+CentOS+宝塔完成环境搭建和配置域名和SSL证书配置 | 桃子王国</title>
+    <link href="http://example.com" rel="prefetch" />
+
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/js/jquery.min.js"></script>
+
+    
+<script src="/js/bootstrap.min.js"></script>
+
+    
+<script src="/js/aos.js"></script>
+
+    
+<script src="/js/highslide/highslide-full.min.js"></script>
+
+    
+<link rel="stylesheet" href="/js/highslide/highslide.css">
+
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="http://example.com">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">桃子王国</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/categories">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/java/">java</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/linux/">linux</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/postoresql/">postoresql</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="http://example.com">桃子王国</a>
+        >
+        <span>linux+CentOS+宝塔完成环境搭建和配置域名和SSL证书配置</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2021/11/25/liunx/">linux+CentOS+宝塔完成环境搭建和配置域名和SSL证书配置</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/linux/">linux</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2021-11-25
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2021/11/25/liunx/">linux+CentOS+宝塔完成环境搭建和配置域名和SSL证书配置</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2021-11-25
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/linux/">linux</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <blockquote>
+<p>对别人的意见要表示尊重。千万别说：“你错了。”——卡耐基</p>
+</blockquote>
+<p>一直想写一下使用linux+CentOS+宝塔完成环境搭建和配置域名和SSL证书配置</p>
+<p>今天正好有时间就记录一下</p>
+<p>这里使用的服务器是：</p>
+<p>阿里云轻量应用服务器 </p>
+<p>CentOS 7.6+Nginx+宝塔7.7.0+java1.8</p>
+<blockquote>
+<p>1:首先安装宝塔</p>
+</blockquote>
+<p>宝塔官网：<a target="_blank" rel="noopener" href="https://www.bt.cn/bbs/thread-19376-1-1.html">https://www.bt.cn/bbs/thread-19376-1-1.html</a></p>
+<p>使用Xshell工具输入：yum install -y wget &amp;&amp; wget -O install.sh <a target="_blank" rel="noopener" href="http://download.bt.cn/install/install_6.0.sh">http://download.bt.cn/install/install_6.0.sh</a> &amp;&amp; sh install.sh</p>
+<p>然后等他安装好之后会给咱们外网和内网的链接以及账号密码</p>
+<p>然后去咱们的服务器开一下安全组：80&#x2F;21&#x2F;22&#x2F;888</p>
+<p>这里记录:</p>
+<blockquote>
+<p>Xshell连接服务器无法用password登录，只能用public key的解决办法</p>
+</blockquote>
+<p>我这里是阿里云的服务器 咱们进入阿里云服务器的后台找到远程链接的按钮切换到root目录下</p>
+<p>修改&#x2F;etc&#x2F;ssh&#x2F;sshd_config文件配置 </p>
+<p>找到PasswordAuthentication no 改成 PasswordAuthentication yes</p>
+<p>然后重启sshd服务</p>
+<p>CentOS 7 下重启服务不再通过 service 操作，而是通过 systemctl 操作</p>
+<p>重启：systemctl restart sshd.service</p>
+<p>然后就可以使用密码登录了</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211125134949.png"></p>
+<p>安装完之后我登录进去我这里选择的一键安装编译安装，也可以手动安装，这里没有使用docker管理</p>
+<p>使用xshell查看宝塔账号信息：bt default</p>
+<blockquote>
+<p>2:安装java环境</p>
+</blockquote>
+<p>首先去官网下载jdk1.8:<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/#java8">https://www.oracle.com/java/technologies/downloads/#java8</a></p>
+<p>然后下载：jdk-8u311-linux-x64.tar.gz</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211125194405.png"></p>
+<p>我这里使用宝塔上传解压的 很是方便</p>
+<p>然后打开咱们xshell 输入：vim &#x2F;etc&#x2F;profile 编辑咱们的环境变量</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211125194559.png"></p>
+<p>然后按住 i 编辑咱们的环境变量</p>
+<p>然后输入：</p>
+<p>JAVA_HOME&#x3D;&#x2F;home&#x2F;java&#x2F;jdk1.8.0_311</p>
+<p>CLASSPATH&#x3D;$JAVA_HOME&#x2F;lib&#x2F;</p>
+<p>PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin</p>
+<p>export PATH JAVA_HOME CLASSPATH</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211125194904.png"></p>
+<p>我这里安装的路径是&#x2F;home&#x2F;java&#x2F;下的包名 根据自己装的目录更改</p>
+<p>配置好之后按 Esc 退出编辑模式 光标消失之后 按 :wq 保存</p>
+<p>配置好之后咱们重启配置文件 让配置生效 ：source &#x2F;etc&#x2F;profile</p>
+<p>重启之后：java -version 查看java版本 如果出现一下版本号就证明咱们的java环境配置好了</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211125195216.png"></p>
+<blockquote>
+<p>3:启动jar文件</p>
+</blockquote>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211125201247.png"></p>
+<p>从这个文件上传咱们jar包 记得把jar对应端口打开 还有服务器的安全组 我这里是8651</p>
+<p>咱们到对应的目录下面启动jar ：只输出错误信息到日志文件：nohup java -jar Demo.jar &gt;liming Demo.log 2&gt;&amp;1 &amp;</p>
+<p>启动完成之后查看咱们的jar进程：ps -ef | grep java</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211125201845.png"></p>
+<p>这样就可以看到咱们启动的jar进程</p>
+<p>启动出了一个问题：Exception in thread “main” java.lang.UnsupportedClassVersionError</p>
+<p>这个问题是java环境不对 我项目是jdk11 刚才部署的是1.8 我换回来就好了 根据大家java版本部署</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/image-20211125205615928.png"></p>
+<p>看下打印的日志是没有问题的 已经启动起来了</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/image-20211125205809643.png"></p>
+<blockquote>
+<p>3:测试jar包接口是否调通</p>
+</blockquote>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/image-20211125210053160.png"></p>
+<p>结果表示咱们的jar服务已经启动起来了并成功运行</p>
+<p>目前咱们的公网ip和端口都暴露在外 咱们配置一下域名已经SSL证书</p>
+<p>打开宝塔 网站-&gt;添加站点 把咱们买好的域名配置上</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211126084106.png"></p>
+<blockquote>
+<p>4：测试域名是否能够调通</p>
+</blockquote>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211126085458.png"></p>
+<p>如图使用咱们的域名访问也是没有问题的 这里记录一下因为我改过Nginx和站点的默认端口所以我这个端口是可以访问到 因为Nginx和站点默认都是80端口 如果是咱们自定义端口 得去配置文件里面改一下 然后重启咱们的Nginx。</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211126085709.png"></p>
+<p>修改这两个文件夹的配置 把 listen 80; 改成咱们自定义端口 我这里改成86。咱们的域名记得备案！</p>
+<p>然后咱们的域名访问接口就好了，但是http是不安全链接 咱们的端口还暴露在外 咱们还需要配置SSL证书</p>
+<blockquote>
+<p>5：配置SSL证书</p>
+</blockquote>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211126090737.png"></p>
+<p>我这里是申请阿里云免费的证书 咱们下载Nginx的配置文件</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211126090907.png"></p>
+<p>下载好应该是这两个文件 一个.key 一个.pem的文件</p>
+<p>咱们去宝塔把这两个文件配置到域名上</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211126091017.png"></p>
+<p>然后把对应文件里面的内容复制进去</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211126091132.png"></p>
+<p>然后就可以看到咱们的SSL证书的剩余天数</p>
+<p>咱们的证书已经绑定好了，咱们需要使用Nginx的反向代理 把86端口代理到443上面</p>
+<p>首先咱们找到Nginx的配置文件</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211126091312.png"></p>
+<p>然后下方标注的是引入的其他配置文件，咱们根据路径找到引入的配置文件</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211126095310.png"></p>
+<p>咱们可以看到宝塔已经给咱们配置了 监听86端口 指向443 但是这样测试还是访问不到的咱们需要加上</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20211126095437.png"></p>
+<p>加上这些配置就可以查找指定端口并代理到443端口上就可以了</p>
+<blockquote>
+<p>6:效果预览</p>
+</blockquote>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/image-20211126095651157.png"></p>
+<p>通过结果可以清晰的看到通过咱们Https+域名+Api是没有问题的！</p>
+<p>没有解决不了的问题，学无止境，只要努力 任何事情也阻挡不了你前进的脚步 加油少年！！</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            King
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>你好,我的名字叫my king 21岁 家在山东省菏泽市 目前在山东省济南市北京易数模法科技有限公司做软件开发,每天都会学习一点新知识，也会朝着更好的发展去进步，我不抽烟不喝酒，所以身体素质还可以，相信每一天的进步都会激励着我，朝着更好的发展去进步，人生格言 积极向上 不苟活于现在 以后的每一天这里相见</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/10/jsonformat/">前端传递日期格式问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/10/sigar/">使用sigar获取本机 服务器、系统、CPU、JVM、内存信息</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/06/lambda/">lambda表达式中局部变量操作</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/06/qrcode/">使用java生成二维码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/12/01/satoken2/">使用sa-token验证</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/30/satoken/">使用sa-token完成登录功能</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/29/scanpay/">微信扫码支付</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/28/mpinfo/">mybaits-plus处理数据Vo返回</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/26/notnull/">使用Spring Validation优雅地校验参数</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/25/liunx/">linux+CentOS+宝塔完成环境搭建和配置域名和SSL证书配置</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/06/lambda/">lambda表达式中局部变量操作</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/28/mpinfo/">mybaits-plus处理数据Vo返回</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/20/newpapername/">使用xdocreport导出word饼图</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/25/liunx/">linux+CentOS+宝塔完成环境搭建和配置域名和SSL证书配置</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/10/jsonformat/">前端传递日期格式问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/26/notnull/">使用Spring Validation优雅地校验参数</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/23/recursion/">使用1.8新特性stream+lambda实现递归无限极循环</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/25/postoresqlinfo/">postoresql group by的使用</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/12/01/satoken2/">使用sa-token验证</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/29/scanpay/">微信扫码支付</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2021/11/25/liunx/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2021/11/25/liunx/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2021/11/25/liunx/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/java/" style="font-size: 13.313837744472227px;" class="tag-cloud-link">java</a>
+    
+    <a href="/tags/linux/" style="font-size: 15.129153464992125px;" class="tag-cloud-link">linux</a>
+    
+    <a href="/tags/postoresql/" style="font-size: 12.998585484409729px;" class="tag-cloud-link">postoresql</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="https://wallhaven.cc/" target="_blank">壁纸</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/tsukimin/" target="_blank">Github</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 King Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+<script src="/js/activate-power-mode.js"></script>
+
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+
+</html>
