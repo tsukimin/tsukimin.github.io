@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="King">
+    
+    <meta name="description" content="你好,我的名字叫my king 21岁 家在山东省菏泽市 目前在山东省济南市北京易数模法科技有限公司做软件开发,每天都会学习一点新知识，也会朝着更好的发展去进步，我不抽烟不喝酒，所以身体素质还可以，相信每一天的进步都会激励着我，朝着更好的发展去进步，人生格言 积极向上 不苟活于现在 以后的每一天这里相见">
+    
+    
+    
+    
+    
+    
+    <title>使用sigar获取本机 服务器、系统、CPU、JVM、内存信息 | 桃子王国</title>
+    <link href="https://tsukimin.github.io" rel="prefetch" />
+
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/js/jquery.min.js"></script>
+
+    
+<script src="/js/bootstrap.min.js"></script>
+
+    
+<script src="/js/aos.js"></script>
+
+    
+<script src="/js/highslide/highslide-full.min.js"></script>
+
+    
+<link rel="stylesheet" href="/js/highslide/highslide.css">
+
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://tsukimin.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">桃子王国</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/categories">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/java/">java</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/linux/">linux</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/postoresql/">postoresql</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://tsukimin.github.io">桃子王国</a>
+        >
+        <span>使用sigar获取本机 服务器、系统、CPU、JVM、内存信息</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2022/01/10/sigar/">使用sigar获取本机 服务器、系统、CPU、JVM、内存信息</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/java/">java</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2022-01-10
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2022/01/10/sigar/">使用sigar获取本机 服务器、系统、CPU、JVM、内存信息</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2022-01-10
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/java/">java</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <blockquote>
+<p>​    事业是栏杆，我们扶着它在深渊的边沿上走路。——高尔基《阿尔塔莫诺夫家的事业》</p>
+</blockquote>
+<p>周六在家闲来无事学习了一下利用<code>Sigar</code>获取本机服务器、<code>系统</code>、<code>CPU</code>、<code>JVM</code>、<code>内存</code>等信息<br><code>Sigar</code>是<code>Hyperic-hq</code>产品的基础包,是<code>Hyperic HQ</code>主要的数据收集组件。它用来从许多平台收集系统和处理信息</p>
+<p><code>Sigar</code>有<code>C</code>，<code>C#</code>，<code>Java</code>和<code>Perl API</code>，<code>java</code>版的API为sigar.jar sigar.jar的底层是用C语言编写的，它通过本地方法来调用操作系统API来获取系统相关数据。</p>
+<p>注意:Sigar为不同平台提供了不同的库文件.典型的:<br>windows平台:sigar-x86-winnt.dll<br>linux平台:libsigar-x86-linux.so或<br>solaris平台: libsigar-x86-solaris.so或libsigar-sparc-solaris.so或libsigar-sparc64-solaris.so<br>64位平台:分为至强的libsigar-ia64-linux.so和AMD的libsigar-amd64-linux.so,sigar-amd64-winnt.dll</p>
+<p><a target="_blank" rel="noopener" href="https://nchc.dl.sourceforge.net/project/sigar/sigar/1.6/hyperic-sigar-1.6.4.zip">Sigar</a>：文件下载</p>
+<p>首先导入<code>sigar</code>依赖</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.fusesource&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;sigar&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">1.6</span><span class="number">.4</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> space.land.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.SneakyThrows;</span><br><span class="line"><span class="keyword">import</span> org.hyperic.sigar.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> space.land.model.vo.server.ServerInfos;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.net.InetAddress;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Title: 获取本机 服务器、系统、CPU、JVM、内存信息。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Fking&lt;fsyvip66 @ gmail.com&gt;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> 1.0.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2022/1/5 18:53</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ServerUtil</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@SneakyThrows</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ServerInfos <span class="title function_">getServerInfo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//服务器信息</span></span><br><span class="line">        <span class="type">Properties</span> <span class="variable">properties</span> <span class="operator">=</span> System.getProperties();</span><br><span class="line">        Map&lt;String, String&gt; getenv = System.getenv();</span><br><span class="line">        <span class="type">InetAddress</span> <span class="variable">localHost</span> <span class="operator">=</span> InetAddress.getLocalHost();</span><br><span class="line">        ServerInfos.<span class="type">ServerInfo</span> <span class="variable">serverInfo</span> <span class="operator">=</span> ServerInfos.ServerInfo.builder().userName(getenv.get(<span class="string">&quot;USERNAME&quot;</span>)).computerName(getenv.get(<span class="string">&quot;COMPUTERNAME&quot;</span>)).computerDomain(getenv.get(<span class="string">&quot;USERDOMAIN&quot;</span>)).serverIp(localHost.getHostAddress()).hostName(localHost.getHostName()).userHome(properties.getProperty(<span class="string">&quot;user.home&quot;</span>)).userDir(properties.getProperty(<span class="string">&quot;user.dir&quot;</span>)).build();</span><br><span class="line">        <span class="comment">//系统信息</span></span><br><span class="line">        <span class="type">OperatingSystem</span> <span class="variable">instance</span> <span class="operator">=</span> OperatingSystem.getInstance();</span><br><span class="line">        ServerInfos.<span class="type">SystemInfo</span> <span class="variable">systemInfo</span> <span class="operator">=</span> ServerInfos.SystemInfo.builder().vendorName(instance.getVendorName()).arch(instance.getArch()).description(instance.getDescription()).version(instance.getVersion()).build();</span><br><span class="line">        <span class="comment">//CPU信息</span></span><br><span class="line">        <span class="type">Sigar</span> <span class="variable">sigar</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Sigar</span>();</span><br><span class="line">        List&lt;ServerInfos.CpuInfo&gt; cpuInfoList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        CpuInfo[] infoList = sigar.getCpuInfoList();</span><br><span class="line">        CpuPerc[] cpuList = sigar.getCpuPercList();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; infoList.length; i++) &#123;</span><br><span class="line">            <span class="type">CpuInfo</span> <span class="variable">cpuInfo</span> <span class="operator">=</span> infoList[i];</span><br><span class="line">            <span class="type">CpuPerc</span> <span class="variable">cpu</span> <span class="operator">=</span> cpuList[i];</span><br><span class="line">            cpuInfoList.add(ServerInfos.CpuInfo.builder().mhz(cpuInfo.getMhz()).vendor(cpuInfo.getVendor()).cacheSize(cpuInfo.getCacheSize()).freqUser(cpu.getUser()).freqSys(cpu.getSys()).freqWait(cpu.getWait()).freqNice(cpu.getNice()).freqIdle(cpu.getIdle()).freqCombined(cpu.getCombined()).build());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//JVM信息</span></span><br><span class="line">        <span class="type">Runtime</span> <span class="variable">runtime</span> <span class="operator">=</span> Runtime.getRuntime();</span><br><span class="line">        ServerInfos.<span class="type">JvmInfo</span> <span class="variable">jvmInfo</span> <span class="operator">=</span> ServerInfos.JvmInfo.builder().totalMemory(runtime.totalMemory()).freeMemory(runtime.freeMemory()).availableProcessors(runtime.availableProcessors()).version(properties.getProperty(<span class="string">&quot;version&quot;</span>)).vendor(properties.getProperty(<span class="string">&quot;java.vendor&quot;</span>)).home(properties.getProperty(<span class="string">&quot;java.home&quot;</span>)).specificationVersion(properties.getProperty(<span class="string">&quot;java.specification.version&quot;</span>)).classPath(properties.getProperty(<span class="string">&quot;java.class.path&quot;</span>)).libraryPath(properties.getProperty(<span class="string">&quot;java.library.path&quot;</span>)).tmpdir(properties.getProperty(<span class="string">&quot;java.io.tmpdir&quot;</span>)).dirs(properties.getProperty(<span class="string">&quot;java.ext.dirs&quot;</span>)).build();</span><br><span class="line">        <span class="comment">//内存信息</span></span><br><span class="line">        <span class="type">Mem</span> <span class="variable">mem</span> <span class="operator">=</span> sigar.getMem();</span><br><span class="line">        <span class="type">Swap</span> <span class="variable">swap</span> <span class="operator">=</span> sigar.getSwap();</span><br><span class="line">        ServerInfos.<span class="type">MemoryInfo</span> <span class="variable">memoryInfo</span> <span class="operator">=</span> ServerInfos.MemoryInfo.builder().memoryTotal(mem.getTotal() / (<span class="number">1024</span> * <span class="number">1024L</span>)).memoryUsed(mem.getUsed() / (<span class="number">1024</span> * <span class="number">1024L</span>)).memoryFree(mem.getFree() / (<span class="number">1024</span> * <span class="number">1024L</span>)).swapTotal(swap.getTotal() / (<span class="number">1024</span> * <span class="number">1024L</span>)).swapUsed(swap.getUsed() / (<span class="number">1024</span> * <span class="number">1024L</span>)).swapFree(swap.getFree() / (<span class="number">1024</span> * <span class="number">1024L</span>)).build();</span><br><span class="line">        <span class="keyword">return</span> ServerInfos.builder().serverInfo(serverInfo).systemInfo(systemInfo).cpuInfo(cpuInfoList).jvmInfo(jvmInfo).memoryInfo(memoryInfo).build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> space.land.model.vo.server;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Builder;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.experimental.Accessors;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Title: 服务器、系统、CPU、JVM、内存信息。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Fking&lt;fsyvip66 @ gmail.com&gt;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> 1.0.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2022/1/7 14:53</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Builder</span></span><br><span class="line"><span class="meta">@Accessors(chain = true)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ServerInfos</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ServerInfo serverInfo;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> SystemInfo systemInfo;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;CpuInfo&gt; cpuInfo;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> JvmInfo jvmInfo;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> MemoryInfo memoryInfo;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Title:  服务器信息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> Fking&lt;fsyvip666 @ gmail.com&gt;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 2022/1/7</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@NoArgsConstructor</span></span><br><span class="line">    <span class="meta">@AllArgsConstructor</span></span><br><span class="line">    <span class="meta">@Data</span></span><br><span class="line">    <span class="meta">@Builder</span></span><br><span class="line">    <span class="meta">@Accessors(chain = true)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ServerInfo</span> &#123;</span><br><span class="line">        <span class="comment">//用户名</span></span><br><span class="line">        <span class="keyword">private</span> String userName;</span><br><span class="line">        <span class="comment">//计算机名</span></span><br><span class="line">        <span class="keyword">private</span> String computerName;</span><br><span class="line">        <span class="comment">//计算机域名</span></span><br><span class="line">        <span class="keyword">private</span> String computerDomain;</span><br><span class="line">        <span class="comment">//本机ip</span></span><br><span class="line">        <span class="keyword">private</span> String serverIp;</span><br><span class="line">        <span class="comment">//本机主机名</span></span><br><span class="line">        <span class="keyword">private</span> String hostName;</span><br><span class="line">        <span class="comment">//用户的主目录</span></span><br><span class="line">        <span class="keyword">private</span> String userHome;</span><br><span class="line">        <span class="comment">//用户的当前工作目录</span></span><br><span class="line">        <span class="keyword">private</span> String userDir;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Title:  系统信息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> Fking&lt;fsyvip666 @ gmail.com&gt;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 2022/1/7</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@NoArgsConstructor</span></span><br><span class="line">    <span class="meta">@AllArgsConstructor</span></span><br><span class="line">    <span class="meta">@Data</span></span><br><span class="line">    <span class="meta">@Builder</span></span><br><span class="line">    <span class="meta">@Accessors(chain = true)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">SystemInfo</span> &#123;</span><br><span class="line">        <span class="comment">//操作系统名称</span></span><br><span class="line">        <span class="keyword">private</span> String vendorName;</span><br><span class="line">        <span class="comment">//内核构架</span></span><br><span class="line">        <span class="keyword">private</span> String arch;</span><br><span class="line">        <span class="comment">//操作系统的描述</span></span><br><span class="line">        <span class="keyword">private</span> String description;</span><br><span class="line">        <span class="comment">//操作系统的版本号</span></span><br><span class="line">        <span class="keyword">private</span> String version;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Title:  CPU信息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> Fking&lt;fsyvip666 @ gmail.com&gt;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 2022/1/7</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@NoArgsConstructor</span></span><br><span class="line">    <span class="meta">@AllArgsConstructor</span></span><br><span class="line">    <span class="meta">@Data</span></span><br><span class="line">    <span class="meta">@Builder</span></span><br><span class="line">    <span class="meta">@Accessors(chain = true)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">CpuInfo</span> &#123;</span><br><span class="line">        <span class="comment">//CPU的总量MHz</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">int</span> mhz;</span><br><span class="line">        <span class="comment">//CPU的厂商</span></span><br><span class="line">        <span class="keyword">private</span> String vendor;</span><br><span class="line">        <span class="comment">//CPU型号类别</span></span><br><span class="line">        <span class="keyword">private</span> String model;</span><br><span class="line">        <span class="comment">//缓冲缓存数量</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">long</span> cacheSize;</span><br><span class="line">        <span class="comment">//CPU的用户使用率</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">double</span> freqUser;</span><br><span class="line">        <span class="comment">//CPU的系统使用率</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">double</span> freqSys;</span><br><span class="line">        <span class="comment">//CPU的当前等待率</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">double</span> freqWait;</span><br><span class="line">        <span class="comment">//CPU的当前错误率</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">double</span> freqNice;</span><br><span class="line">        <span class="comment">//CPU的当前空闲率</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">double</span> freqIdle;</span><br><span class="line">        <span class="comment">//CPU总的使用率</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">double</span> freqCombined;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Title:  JVM信息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> Fking&lt;fsyvip666 @ gmail.com&gt;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 2022/1/7</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@NoArgsConstructor</span></span><br><span class="line">    <span class="meta">@AllArgsConstructor</span></span><br><span class="line">    <span class="meta">@Data</span></span><br><span class="line">    <span class="meta">@Builder</span></span><br><span class="line">    <span class="meta">@Accessors(chain = true)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">JvmInfo</span> &#123;</span><br><span class="line">        <span class="comment">//JVM可以使用的总内存</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">long</span> totalMemory;</span><br><span class="line">        <span class="comment">//JVM可以使用的剩余内存</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">long</span> freeMemory;</span><br><span class="line">        <span class="comment">//JVM可以使用的处理器个数</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">int</span> availableProcessors;</span><br><span class="line">        <span class="comment">//Java的运行环境版本</span></span><br><span class="line">        <span class="keyword">private</span> String version;</span><br><span class="line">        <span class="comment">//Java的运行环境供应商</span></span><br><span class="line">        <span class="keyword">private</span> String vendor;</span><br><span class="line">        <span class="comment">//Java的安装路径</span></span><br><span class="line">        <span class="keyword">private</span> String home;</span><br><span class="line">        <span class="comment">//Java运行时环境规范版本</span></span><br><span class="line">        <span class="keyword">private</span> String specificationVersion;</span><br><span class="line">        <span class="comment">//Java的类路径</span></span><br><span class="line">        <span class="keyword">private</span> String classPath;</span><br><span class="line">        <span class="comment">//Java加载库时搜索的路径列表</span></span><br><span class="line">        <span class="keyword">private</span> String libraryPath;</span><br><span class="line">        <span class="comment">//默认的临时文件路径</span></span><br><span class="line">        <span class="keyword">private</span> String tmpdir;</span><br><span class="line">        <span class="comment">//扩展目录的路径</span></span><br><span class="line">        <span class="keyword">private</span> String dirs;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Title:  内存信息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> Fking&lt;fsyvip666 @ gmail.com&gt;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 2022/1/7</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@NoArgsConstructor</span></span><br><span class="line">    <span class="meta">@AllArgsConstructor</span></span><br><span class="line">    <span class="meta">@Data</span></span><br><span class="line">    <span class="meta">@Builder</span></span><br><span class="line">    <span class="meta">@Accessors(chain = true)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">MemoryInfo</span> &#123;</span><br><span class="line">        <span class="comment">//内存总量</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">long</span> memoryTotal;</span><br><span class="line">        <span class="comment">//当前内存使用量</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">long</span> memoryUsed;</span><br><span class="line">        <span class="comment">//当前内存剩余量</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">long</span> memoryFree;</span><br><span class="line">        <span class="comment">//交换区总量</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">long</span> swapTotal;</span><br><span class="line">        <span class="comment">//当前交换区使用量</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">long</span> swapUsed;</span><br><span class="line">        <span class="comment">//当前交换区剩余量</span></span><br><span class="line">        <span class="keyword">private</span> <span class="type">long</span> swapFree;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220111090008.png"></p>
+<p>过程问题记录：</p>
+<p>因为我电脑上java版本有很多个，1.8&#x2F;11&#x2F;17 放文件的时候放错了版本就出现了错误1：</p>
+<p>org.hyperic.sigar.SigarException: no sigar-amd64-winnt.dll in java.library</p>
+<p>提示我没有找到该文件进行监控。</p>
+<p>这个时候咱们打印System.out.println(System.get<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Properties">Properties</a>().getProperty(“java.library.path”));</p>
+<p>看看咱们的jdk装到了哪里，然后把文件放到对应的bin目录下面根据不同的系统对应放上。</p>
+<p>这个问题就解决了，随之迎来了第二个问题，就是对应上之后当我在执行的时候又出现了另一个问题</p>
+<p>错误2：</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/940621262e5f044f35aff10ad16324c.png"></p>
+<p>这个问题是在Windows下Java 版本中 <code>1.8.0_131</code> 到 <code>1.8.0_241</code> 都适合, 在 jdk1.8.0_261 包括在内以及以上不适合</p>
+<p>Windows下降低版本然后重新导入就可以了。至于Liunx下我还没有测试</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220111092938.png"></p>
+<p>今日鸡汤：吸取教训是健康的做法，这是个人成长过程中的必要环节。悔恨则是一种不健康的心理。这是白白浪费自己目前的精力。</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            King
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>你好,我的名字叫my king 21岁 家在山东省菏泽市 目前在山东省济南市北京易数模法科技有限公司做软件开发,每天都会学习一点新知识，也会朝着更好的发展去进步，我不抽烟不喝酒，所以身体素质还可以，相信每一天的进步都会激励着我，朝着更好的发展去进步，人生格言 积极向上 不苟活于现在 以后的每一天这里相见</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/10/jsonformat/">前端传递日期格式问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/10/sigar/">使用sigar获取本机 服务器、系统、CPU、JVM、内存信息</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/06/lambda/">lambda表达式中局部变量操作</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/06/qrcode/">使用java生成二维码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/12/01/satoken2/">使用sa-token验证</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/30/satoken/">使用sa-token完成登录功能</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/29/scanpay/">微信扫码支付</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/28/mpinfo/">mybaits-plus处理数据Vo返回</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/26/notnull/">使用Spring Validation优雅地校验参数</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/25/liunx/">linux+CentOS+宝塔完成环境搭建和配置域名和SSL证书配置</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/28/mpinfo/">mybaits-plus处理数据Vo返回</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/06/lambda/">lambda表达式中局部变量操作</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/06/qrcode/">使用java生成二维码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/10/jsonformat/">前端传递日期格式问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/25/liunx/">linux+CentOS+宝塔完成环境搭建和配置域名和SSL证书配置</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/25/postoresqlinfo/">postoresql group by的使用</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/29/scanpay/">微信扫码支付</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/30/satoken/">使用sa-token完成登录功能</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/23/recursion/">使用1.8新特性stream+lambda实现递归无限极循环</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/10/sigar/">使用sigar获取本机 服务器、系统、CPU、JVM、内存信息</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2022/01/10/sigar/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2022/01/10/sigar/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2022/01/10/sigar/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/java/" style="font-size: 11.33965905813658px;" class="tag-cloud-link">java</a>
+    
+    <a href="/tags/linux/" style="font-size: 18.694147092817143px;" class="tag-cloud-link">linux</a>
+    
+    <a href="/tags/postoresql/" style="font-size: 9.646759749754908px;" class="tag-cloud-link">postoresql</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="https://wallhaven.cc/" target="_blank">壁纸</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/tsukimin/" target="_blank">Github</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 King Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300,"mobile":null,"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+<script src="/js/activate-power-mode.js"></script>
+
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+
+</html>
