@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="King">
+    
+    <meta name="description" content="你好,我的名字叫my king 21岁 家在山东省菏泽市 目前在山东省济南市北京易数模法科技有限公司做软件开发,每天都会学习一点新知识，也会朝着更好的发展去进步，我不抽烟不喝酒，所以身体素质还可以，相信每一天的进步都会激励着我，朝着更好的发展去进步，人生格言 积极向上 不苟活于现在 以后的每一天这里相见">
+    
+    
+    
+    
+    
+    
+    <title>CentOS7安装Oracle11g | 桃子王国</title>
+    <link href="https://tsukimin.github.io" rel="prefetch" />
+
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/js/jquery.min.js"></script>
+
+    
+<script src="/js/bootstrap.min.js"></script>
+
+    
+<script src="/js/aos.js"></script>
+
+    
+<script src="/js/highslide/highslide-full.min.js"></script>
+
+    
+<link rel="stylesheet" href="/js/highslide/highslide.css">
+
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg,preview5.jpg,preview6.jpg,preview7.jpg,preview8.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://tsukimin.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">桃子王国</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/categories">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/java/">java</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/linux/">linux</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/postoresql/">postoresql</a>
+                        </li>
+                        
+                        
+                        <li>
+                            <a href="/tags">...</a>
+                        </li>
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://tsukimin.github.io">桃子王国</a>
+        >
+        <span>CentOS7安装Oracle11g</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2022/04/14/orcale/">CentOS7安装Oracle11g</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/orcale/">orcale</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2022-04-14
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2022/04/14/orcale/">CentOS7安装Oracle11g</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2022-04-14
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/orcale/">orcale</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <blockquote>
+<p>社会犹如一条船，没跟人都要有掌舵的准备。——易卜生</p>
+</blockquote>
+<p>CentOS7安装Oracle11g</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>操作系统</td>
+<td>CentOS 7.6.1810 x86_64(Py3.7.9)</td>
+</tr>
+<tr>
+<td>oracle</td>
+<td>linux.x64_11g_11.2.0.4</td>
+</tr>
+</tbody></table>
+<p>Oracle11g版本选择：<br>强烈建议下载 11.2.0.4版本的，oracle版本是官网下载的11.2.0.1有点小坑在里面，我是后来遇到坑后换成的 11.2.0.4版本。</p>
+<p><strong>准备工作</strong><br>兵马未动，粮草先行。</p>
+<p>在安装之前，我们要做一些简单的准备工作，大致如下：</p>
+<p>1:创建oracle用户和组<br>2:图形化的操作环境：VNC远程或者直接本地图形化操作。<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Mh411C71D/">参考网站</a></p>
+<h2 id="一键安装和配置VNC图形化相关"><a href="#一键安装和配置VNC图形化相关" class="headerlink" title="一键安装和配置VNC图形化相关"></a>一键安装和配置<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=VNC&spm=1001.2101.3001.7020">VNC</a>图形化相关</h2><p>root执行以下命令 可以直接整体复制粘贴到终端就行（不用一行一行复制）。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">图形界面必备`X Window System`</span></span><br><span class="line">yum -y groupinstall &quot;X Window System&quot;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">安装epel源</span></span><br><span class="line">yum -y install epel-release</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">安装VNC+图形需要的软件</span></span><br><span class="line">yum -y install tigervnc-server openbox xfce4-terminal tint2 cjkuni-ukai-fonts network-manager-applet</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">自动修改/etc/xdg/openbox/autostart配置文件</span></span><br><span class="line">echo &#x27;if which dbus-launch &gt;/dev/null &amp;&amp; test -z &quot;$DBUS_SESSION_BUS_ADDRESS&quot;; then&#x27; &gt; /etc/xdg/openbox/autostart</span><br><span class="line">echo &#x27;       eval `dbus-launch --sh-syntax --exit-with-session`&#x27; &gt;&gt; /etc/xdg/openbox/autostart</span><br><span class="line">echo &#x27;fi&#x27; &gt;&gt; /etc/xdg/openbox/autostart</span><br><span class="line">echo &#x27;tint2 &amp;&#x27; &gt;&gt; /etc/xdg/openbox/autostart</span><br><span class="line">echo &#x27;nm-applet  &amp;&#x27; &gt;&gt; /etc/xdg/openbox/autostart</span><br><span class="line">echo &#x27;xfce4-terminal &amp;&#x27; &gt;&gt; /etc/xdg/openbox/autostart</span><br><span class="line">echo &#x27; &#x27; &gt;&gt; /etc/xdg/openbox/autostart</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">防火墙放行VNC端口</span></span><br><span class="line">firewall-cmd --add-port=5901/tcp</span><br><span class="line">firewall-cmd --add-port=5901/tcp --permanent</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><p>为了安全起见，不建议使用<code>root</code>做为<code>vnc</code>用户。单独创建一个用户比较安全。<br>既然安装<code>oracle</code>,用户名我使用<code> oracle</code>。</p>
+<p>root执行以下命令 可以直接整体复制粘贴到终端就行（不用一行一行复制）。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">创建database用户组</span></span><br><span class="line">groupadd database</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">创建oracle用户并放入database组中</span></span><br><span class="line">useradd oracle -g database</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">设置oracle密码</span></span><br><span class="line">passwd oracle </span><br></pre></td></tr></table></figure>
+
+<p>执行完之后会提示<code>new password</code> 设置用户密码 我这里设置的：<code>admin</code></p>
+<h2 id="开启-VNC服务"><a href="#开启-VNC服务" class="headerlink" title="开启 VNC服务"></a>开启 VNC服务</h2><p>切换到oracle用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su oracle</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">首次运行，生成~/.vnc/xstartup等配置文件</span></span><br><span class="line">vncserver :1 -geometry 1024x768</span><br></pre></td></tr></table></figure>
+
+<p>我这里设置的密码是 :<code>vncadmin</code></p>
+<p>oracle用户执行以下命令，可以直接整体复制粘贴到终端就行（不用一行一行复制）。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">配置VNC默认启动openbox</span></span><br><span class="line">echo &quot;openbox-session &amp;&quot; &gt; ~/.vnc/xstartup</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">停止服务</span></span><br><span class="line">vncserver -kill :1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">重新开启vnc服务</span></span><br><span class="line">vncserver :1 -geometry 1024x768</span><br></pre></td></tr></table></figure>
+
+<h2 id="客户端连接VNC实现远程控制"><a href="#客户端连接VNC实现远程控制" class="headerlink" title="客户端连接VNC实现远程控制"></a>客户端连接VNC实现远程控制</h2><p>使用你的VNC客户端连接就行了，会的就略过吧。<br>我用的是：<a target="_blank" rel="noopener" href="https://www.realvnc.com/en/connect/download/viewer/">VNC Viewer点击下载</a><br>我的地址如下：<code>47.99.54.83:5901</code></p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414113329.png"></p>
+<p>公网IP+端口回车就可以，如果提示<code>Timed out waiting for a response from the computer</code></p>
+<p>端口未被开放，我这里是阿里云服务器给安全组配置好端口就可以连接上了，输入设置的密码就可以</p>
+<p>如果你连接的时候发现，没有界面，是黑屏的只有一个鼠标，那么可以<strong>重启一下VNC服务</strong>试试。<br>切换到oracle用户<code>su oracle</code><br>命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vncserver -kill :1</span><br><span class="line">vncserver :1 -geometry 1024x768</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装oracle安装程序依赖程序包"><a href="#安装oracle安装程序依赖程序包" class="headerlink" title="安装oracle安装程序依赖程序包"></a>安装oracle安装程序依赖程序包</h2><p>root用户执行以下命令:<code>su root</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install binutils compat-libcap1  compat-libstdc++-33 compat-libstdc++-33*.i686 elfutils-libelf-devel gcc gcc-c++ glibc*.i686 glibc glibc-devel glibc-devel*.i686 ksh libgcc*.i686 libgcc libstdc++ libstdc++*.i686 libstdc++-devel libstdc++-devel*.i686 libaio libaio*.i686 libaio-devel libaio-devel*.i686 make sysstat unixODBC unixODBC*.i686 unixODBC-devel unixODBC-devel*.i686 libXp</span><br></pre></td></tr></table></figure>
+
+<p>安装中文字体解决中文乱码问题<br>默认情况下，因CentOS 中缺少中易宋体18030所以会导致中文显示成□□□□□的问题。<br>中文是世界上最美的文字，不能显示太可惜了。很简单增加所需字体就行了。操作如下：<br>下载字体：<br><a target="_blank" rel="noopener" href="https://download.csdn.net/download/lxyoucan/14968070">https://download.csdn.net/download/lxyoucan/14968070</a><br>root执行以下命令：<br>新建文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/share/fonts/zh_CN/TrueType</span><br></pre></td></tr></table></figure>
+
+<p><code>zysong.ttf</code>上传到&#x2F;usr&#x2F;share&#x2F;fonts&#x2F;zh_CN&#x2F;TrueType目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 75 /usr/share/fonts/zh_CN/TrueType/zysong.ttf</span><br></pre></td></tr></table></figure>
+
+<p>字体安装完成，这样安装oracle就不会中文乱码了。</p>
+<p>就喜欢英文安装界面，想用英文界面怎么办呢？<br>如果不想用中文界面安装，安装前运行以下命令，临时使用英文环境。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LANG=en_US</span><br></pre></td></tr></table></figure>
+
+<h2 id="上传并解压安装包"><a href="#上传并解压安装包" class="headerlink" title="上传并解压安装包"></a>上传并解压安装包</h2><p>安装包我上传到网盘上了需要直接 <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/106-nvxG-YWeZnG-yFdPMRw">下载</a></p>
+<p>提取码：4v9e</p>
+<p>上传安装包到 CentOS7服务器。我上传到 <code>/home/oracle/</code>目录了。<br>上传以后，文件路径和名称如下：</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414151341.png"></p>
+<p>我这里是使用宝塔面板上传解压的，也可以使用unzip解压</p>
+<p>如果没有unzip工具，安装unzip用于文件解压root执行以下面</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install unzip</span><br><span class="line">unzip 需要解压的文件</span><br></pre></td></tr></table></figure>
+
+<p>安装oracle实战<br>准备工作已经结束了，接下来的安装工作就跟在windows下安装oracle差不多了。先总结一下，基本就是根据界面提示就可以一路“下一步（N）”就可以完成了。<br>需要稍微注意的就是：</p>
+<p>桌面类与服务器类的选择<br>超级管理员密码的设置<br>先决条件检查<br>其它的根据自己的需要，或者一路“下一步（N）”就可以完成了。为了一些朋友更直观的观看，我把每一步都截图了，可以跳着看。</p>
+<p>oracle用户登录vnc远程桌面。<br>进入<code>~/database/</code>目录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">进入安装目录</span></span><br><span class="line">cd ~/database/</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">运行安装程序</span></span><br><span class="line">./runInstaller</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置安全更新"><a href="#配置安全更新" class="headerlink" title="配置安全更新"></a>配置安全更新</h2><p>根据需要设置，我这里就不设置了。<img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414151535.png"></p>
+<h2 id="网络安装选项"><a href="#网络安装选项" class="headerlink" title="网络安装选项"></a>网络安装选项</h2><p>选择“<code>创建和配置数据库（C）</code>”</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414151716.png"></p>
+<h2 id="桌面类-or-服务器类"><a href="#桌面类-or-服务器类" class="headerlink" title="桌面类 or 服务器类"></a>桌面类 or 服务器类</h2><p>描述中已经说的很清楚了，根据自己需要选择。这里我选择的是<code>服务器类（S）</code>。</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414151940.png"></p>
+<h2 id="安装类型"><a href="#安装类型" class="headerlink" title="安装类型"></a>安装类型</h2><p>我选默认的，<code>单实例数据库安装（S）</code>根据实际需要选择。</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414152014.png"></p>
+<h2 id="典型安装"><a href="#典型安装" class="headerlink" title="典型安装"></a>典型安装</h2><p>默认<code>典型安装（T）</code>即可。</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414152103.png"></p>
+<h2 id="典型安装配置"><a href="#典型安装配置" class="headerlink" title="典型安装配置"></a>典型安装配置</h2><p>主要设置一下密码，其他默认即可。这里密码要在大写字母+小写字母+数字组合。比如：我设置的是<code>Admin0102</code>。</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414152410.png"></p>
+<h2 id="创建产品清单"><a href="#创建产品清单" class="headerlink" title="创建产品清单"></a>创建产品清单</h2><p>默认即可。</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414152438.png"></p>
+<p>执行先决条件检查<br>这一步要稍花一些时间处理。每个人的显示可能略有不同。比如：物理内存的检测，我这个1G内存就会提示小于预期。<br>处理方法：</p>
+<p>根据提示信息做处理即可，比如：内存小了，加大内存啊。<br>执行修补并再次检查（F） 可以自动修复</p>
+<p>方法上面描述的很清楚。<br>root权限执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/tmp/CVU_11.2.0.1.0_oracle/runfixup.sh</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414153544.png"></p>
+<p>修复之后，警告我全部忽略了。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>这里显示了安装配置的概要部分，检查一下是否正确。没问题就开始安装吧！</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414162916.png"></p>
+<h2 id="安装产品"><a href="#安装产品" class="headerlink" title="安装产品"></a>安装产品</h2><p>上面折腾了这么久终于迎来了真正的安装操作了。</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414163116.png"></p>
+<h2 id="进度70-ins-emagent-mk错误弹框"><a href="#进度70-ins-emagent-mk错误弹框" class="headerlink" title="进度70% ins_emagent.mk错误弹框"></a>进度70% ins_emagent.mk错误弹框</h2><p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414165108.png"></p>
+<p>编辑：<br>&#x2F;home&#x2F;oracle&#x2F;app&#x2F;oracle&#x2F;product&#x2F;11.2.0&#x2F;dbhome_1&#x2F;sysman&#x2F;lib&#x2F;ins_emagent.mk<br>约176行，可以搜索<code>$(MK_EMAGENT_NMECTL)</code> 关键字快速找到。</p>
+<p>修改后如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">===========================</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> emdctl</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">===========================</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">(SYSMANBIN)emdctl:</span></span><br><span class="line"><span class="meta prompt_">	$</span><span class="language-bash">(MK_EMAGENT_NMECTL) -lnnz11</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">===========================</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> nmocat</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">===========================</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>点击重试。</p>
+<h2 id="复制数据库文件"><a href="#复制数据库文件" class="headerlink" title="复制数据库文件"></a>复制数据库文件</h2><p>上面的问题解决后，安装一会儿就会出现如下的界面。耐心等待即可。</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414165220.png"></p>
+<h2 id="数据库创建完成"><a href="#数据库创建完成" class="headerlink" title="数据库创建完成"></a>数据库创建完成</h2><p>经过一段时间的等待，终于弹出如下界面。</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414170035.png"></p>
+<h2 id="执行配置脚本"><a href="#执行配置脚本" class="headerlink" title="执行配置脚本"></a>执行配置脚本</h2><p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414170238.png"></p>
+<p>根据上图提示,root 执行上面两个脚本就可以了。<br>执行结果如下：<br>[root@localhost ~]# &#x2F;home&#x2F;oracle&#x2F;app&#x2F;oraInventory&#x2F;orainstRoot.sh<br>更改权限&#x2F;home&#x2F;oracle&#x2F;app&#x2F;oraInventory.<br>添加组的读取和写入权限。<br>删除全局的读取, 写入和执行权限。</p>
+<p>更改组名&#x2F;home&#x2F;oracle&#x2F;app&#x2F;oraInventory 到 database.<br>脚本的执行已完成。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# /home/oracle/app/oraInventory/orainstRoot.sh </span><br><span class="line">更改权限/home/oracle/app/oraInventory.</span><br><span class="line">添加组的读取和写入权限。</span><br><span class="line">删除全局的读取, 写入和执行权限。</span><br><span class="line"></span><br><span class="line">更改组名/home/oracle/app/oraInventory 到 database.</span><br><span class="line">脚本的执行已完成。</span><br><span class="line">[root@localhost ~]# /home/oracle/app/oracle/product/11.2.0/dbhome_1/root.sh </span><br><span class="line">Performing root user operation for Oracle 11g </span><br><span class="line"></span><br><span class="line">The following environment variables are set as:</span><br><span class="line">    ORACLE_OWNER= oracle</span><br><span class="line">    ORACLE_HOME=  /home/oracle/app/oracle/product/11.2.0/dbhome_1</span><br><span class="line"></span><br><span class="line">Enter the full pathname of the local bin directory: [/usr/local/bin]: </span><br><span class="line">   Copying dbhome to /usr/local/bin ...</span><br><span class="line">   Copying oraenv to /usr/local/bin ...</span><br><span class="line">   Copying coraenv to /usr/local/bin ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Creating /etc/oratab file...</span><br><span class="line">Entries will be added to the /etc/oratab file as needed by</span><br><span class="line">Database Configuration Assistant when a database is created</span><br><span class="line">Finished running generic part of root script.</span><br><span class="line">Now product-specific root actions will be performed.</span><br><span class="line">Finished product-specific root actions.</span><br><span class="line">[root@localhost ~]# </span><br></pre></td></tr></table></figure>
+
+<p>执行完点击Ok</p>
+<h2 id="Oracle-Database-的安装已成功"><a href="#Oracle-Database-的安装已成功" class="headerlink" title="Oracle Database 的安装已成功"></a>Oracle Database 的安装已成功</h2><p>经过我们的努力，终于走到了这一步。<br>Oracle Database 的安装已成功。</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414170343.png"></p>
+<p>点击<code>关闭</code>即可。</p>
+<h1 id="防火墙放行1521"><a href="#防火墙放行1521" class="headerlink" title="防火墙放行1521"></a>防火墙放行1521</h1><p>默认端口是1521</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">防火墙放行1521oracle端口</span></span><br><span class="line">firewall-cmd --add-port=1521/tcp</span><br><span class="line">firewall-cmd --add-port=1521/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su oracle</span><br></pre></td></tr></table></figure>
+
+<p>切换到oracle用户操作。<br>编辑配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>文件末尾加入以下内容，ORACLE_HOME中换成你实际安装的路径</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export ORACLE_HOME=/home/oracle/app/oracle/product/11.2.0/dbhome_1/</span><br><span class="line">export ORACLE_SID=orcl</span><br><span class="line">export PATH=$PATH:$ORACLE_HOME/bin</span><br></pre></td></tr></table></figure>
+
+<p>使用配置文件立即生效。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<h1 id="日常运维-启动oracle"><a href="#日常运维-启动oracle" class="headerlink" title="日常运维 启动oracle"></a>日常运维 启动oracle</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">su oracle</span><br><span class="line">sqlplus /nolog</span><br><span class="line"><span class="meta prompt_">SQL&gt; </span><span class="language-bash">connect /as sysdba</span></span><br><span class="line"><span class="meta prompt_">SQL&gt; </span><span class="language-bash">startup</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="sys用户登录"><a href="#sys用户登录" class="headerlink" title="sys用户登录"></a>sys用户登录</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[oracle@localhost ~]$ sqlplus /nolog</span><br><span class="line"></span><br><span class="line">SQL*Plus: Release 11.2.0.4.0 Production on Tue Feb 2 02:59:38 2021</span><br><span class="line"></span><br><span class="line">Copyright (c) 1982, 2013, Oracle.  All rights reserved.</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">SQL&gt; </span><span class="language-bash">connect as sysdba</span></span><br><span class="line">Enter user-name: sys</span><br><span class="line">Enter password: </span><br><span class="line">Connected.</span><br><span class="line"><span class="meta prompt_">SQL&gt; </span><span class="language-bash">select 1 from dual;</span></span><br><span class="line"></span><br><span class="line">	 1</span><br><span class="line">----------</span><br><span class="line">	 1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">SQL&gt; </span></span><br></pre></td></tr></table></figure>
+
+<p>如果启动报错：ORA-27154: post&#x2F;wait create failed</p>
+<p>还会伴随以下几个错误：</p>
+<p>ORA-27300: OS system dependent operation:semget failed with status: 28<br>ORA-27301: OS failure message: No space left on device<br>ORA-27302: failure occurred at: sskgpcreates<br>查看当前设置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/sys/kernel/sem</span><br></pre></td></tr></table></figure>
+
+<p>4个数据分别对应：SEMMSL SEMMNS SEMOPM SEMMNI</p>
+<p>具体的意义这里不作説明，只说下修改方案。</p>
+<p>将<code>/proc/sys/kernel/sem</code>下的<code>kernel.sem</code>改成<code>kernel.sem =5010 641280 5010 128</code></p>
+<p>然后执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+
+<p>然后重新连接就可以了。</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414173944.png"></p>
+<p>没有问题，说明oracle本地连接oracle成功。</p>
+<h2 id="启动监听"><a href="#启动监听" class="headerlink" title="启动监听"></a>启动监听</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsnrctl start</span><br></pre></td></tr></table></figure>
+
+<p>使用Navicat16连接测试！</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220414175200.png"></p>
+<p>到此结束！！！</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            King
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"><p>你好,我的名字叫my king 21岁 家在山东省菏泽市 目前在山东省济南市北京易数模法科技有限公司做软件开发,每天都会学习一点新知识，也会朝着更好的发展去进步，我不抽烟不喝酒，所以身体素质还可以，相信每一天的进步都会激励着我，朝着更好的发展去进步，人生格言 积极向上 不苟活于现在 以后的每一天这里相见</p>
+</p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/04/14/orcale/">CentOS7安装Oracle11g</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/10/jsonformat/">前端传递日期格式问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/10/sigar/">使用sigar获取本机 服务器、系统、CPU、JVM、内存信息</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/06/lambda/">lambda表达式中局部变量操作</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/06/qrcode/">使用java生成二维码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/12/01/satoken2/">使用sa-token验证</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/30/satoken/">使用sa-token完成登录功能</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/29/scanpay/">微信扫码支付</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/28/mpinfo/">mybaits-plus处理数据Vo返回</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/26/notnull/">使用Spring Validation优雅地校验参数</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/28/mpinfo/">mybaits-plus处理数据Vo返回</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/26/notnull/">使用Spring Validation优雅地校验参数</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/25/liunx/">linux+CentOS+宝塔完成环境搭建和配置域名和SSL证书配置</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/06/qrcode/">使用java生成二维码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/25/postoresqlinfo/">postoresql group by的使用</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/12/01/satoken2/">使用sa-token验证</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/23/recursion/">使用1.8新特性stream+lambda实现递归无限极循环</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/11/30/satoken/">使用sa-token完成登录功能</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/01/10/sigar/">使用sigar获取本机 服务器、系统、CPU、JVM、内存信息</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/04/14/orcale/">CentOS7安装Oracle11g</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2022/04/14/orcale/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2022/04/14/orcale/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2022/04/14/orcale/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/java/" style="font-size: 8.553689994883468px;" class="tag-cloud-link">java</a>
+    
+    <a href="/tags/linux/" style="font-size: 14.730293586592861px;" class="tag-cloud-link">linux</a>
+    
+    <a href="/tags/postoresql/" style="font-size: 9.050515514979676px;" class="tag-cloud-link">postoresql</a>
+    
+    <a href="/tags/orcale/" style="font-size: 19.71784645332179px;" class="tag-cloud-link">orcale</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="https://wallhaven.cc/" target="_blank">壁纸</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/tsukimin/" target="_blank">Github</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 King Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300,"mobile":null,"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+<script src="/js/activate-power-mode.js"></script>
+
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '10'
+    }
+</script>
+
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+
+</html>
