@@ -12,7 +12,7 @@
     
     
     
-    <title>tags: java | 桃子王国</title>
+    <title>lombok_autowired | 桃子王国</title>
     <link href="https://tsukimin.github.io" rel="prefetch" />
 
     
@@ -176,19 +176,34 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 gal-right" id="mainstay">
-                    <article class="article well article-body" id="article-tag">
+                    
+<article class="article well article-body" id="article">
     <div class="breadcrumb">
         <i class="fa fa-home"></i>
         <a href="https://tsukimin.github.io">桃子王国</a>
         >
-        <span>标签</span>
+        <span>lombok_autowired</span>
     </div>
     <!-- 大型设备详细文章 -->
     <div class="hidden-xs">
         <div class="title-article">
             <h1>
-                <a href="/tags/java/page/2/index.html">java</a>
+                <a href="/2022/05/31/lombok-autowired/">lombok_autowired</a>
             </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/java/">java</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2022-05-31
+            </span>
+            
         </div>
     </div>
     <!-- 小型设备详细文章 -->
@@ -196,24 +211,45 @@
         <center>
             <div class="title-article">
                 <h4>
-                    <a href="/tags/java/page/2/index.html">java</a>
+                    <a href="/2022/05/31/lombok-autowired/">lombok_autowired</a>
                 </h4>
             </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2022-05-31
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/java/">java</a>
+                
+                
+                
+            </p>
         </center>
     </div>
-    <div class="content-article" style="margin-top: 30px;">
-        <div class="alert alert-info" style="font-size: 14px; line-height: 2; font-weight: bold;">
-            
-            <a href="/2021/11/23/recursion/">使用1.8新特性stream+lambda实现递归无限极循环</a>
-            <br>
-            
-            <a href="/2021/11/20/newpapername/">使用xdocreport导出word饼图</a>
-            <br>
-            
-            
-        </div>
+    <div class="content-article">
+        <blockquote>
+<p>​    读书愈多。精神就愈健壮勇敢。——高尔基</p>
+</blockquote>
+<h4 id="lombock之-RequiredArgsConstructor-onConstructor-x3D-Autowired"><a href="#lombock之-RequiredArgsConstructor-onConstructor-x3D-Autowired" class="headerlink" title="lombock之@RequiredArgsConstructor(onConstructor &#x3D;@__(@Autowired))"></a>lombock之@RequiredArgsConstructor(onConstructor &#x3D;@__(@Autowired))</h4><p>注解说明：在我们写<code>controller</code>或者<code>Service</code>层的时候，需要注入很多的<code>mapper</code>接口或者另外的<code>service</code>接口，这时候就会写很多的<code>@AutoWired</code>注解，代码看起来很乱</p>
+<p>lombock提供了一个注解：</p>
+<p>@RequiredArgsConstructor(onConstructor &#x3D;@__(@Autowired))</p>
+<p>写在类上可以代替<code>@Autowired</code>注解，需要注意的是在注入时需要用final定义，或者使用<code>@notnull</code>注解</p>
+<p>使用这个注解之前记得下载lombock插件</p>
+<p>有的小伙伴可能遇到idea写入这个注解出现<code>_</code>不认识该符号。</p>
+<p>有三个原因：</p>
+<h5 id="1：没装lombok"><a href="#1：没装lombok" class="headerlink" title="1：没装lombok"></a>1：没装lombok</h5><p>如果你是idea，那就不需要下载lombok,只需要在依赖中添加lombok依赖就好,idea自动装了lombok。</p>
+<h5 id="2：版本错误"><a href="#2：版本错误" class="headerlink" title="2：版本错误"></a>2：版本错误</h5><p>有的版本是_一个下划线,有的是两个下划线__, 所以还是注意看一下</p>
+<h5 id="3：汉化插件问题"><a href="#3：汉化插件问题" class="headerlink" title="3：汉化插件问题"></a>3：汉化插件问题</h5><p>这个是我自己遇到的问题,我两个下划线一直报错,是因为我下载了idea汉化插件,引起的版本冲突,我关闭汉化插件就好了。</p>
+<p>还等着什么想要代码更整洁，用起来吧！注意依赖冲突哦！</p>
+<p>最后贴个图：</p>
+<p><img src="https://minking.oss-cn-beijing.aliyuncs.com/img/20220531190450.png"></p>
+
     </div>
 </article>
+
+
                 </div>
                 <aside class="col-md-4 gal-left" id="sidebar">
     <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
@@ -347,13 +383,19 @@
             
             <li class="list-group-item">
                 <span class="post-title">
+                    <a href="/2022/01/10/jsonformat/">前端传递日期格式问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
                     <a href="/2022/05/31/lombok-autowired/">lombok_autowired</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2021/11/26/notnull/">使用Spring Validation优雅地校验参数</a>
+                    <a href="/2021/11/20/newpapername/">使用xdocreport导出word饼图</a>
                 </span>
             </li>
             
@@ -366,12 +408,6 @@
             <li class="list-group-item">
                 <span class="post-title">
                     <a href="/2021/11/25/postoresqlinfo/">postoresql group by的使用</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2022/01/06/qrcode/">使用java生成二维码</a>
                 </span>
             </li>
             
@@ -416,17 +452,17 @@
 
                 
                 <li>
-                    <a href="/tags/java/page/2/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                    <a href="/2022/05/31/lombok-autowired/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
                 </li>
                 
                 
                 <li>
-                    <a href="/tags/java/page/2/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                    <a href="/2022/05/31/lombok-autowired/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
                 </li>
                 
                 
                 <li>
-                    <a href="/tags/java/page/2/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                    <a href="/2022/05/31/lombok-autowired/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
                 </li>
                 
             </ul>
@@ -434,13 +470,13 @@
                 
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/java/" style="font-size: 8.491053367041644px;" class="tag-cloud-link">java</a>
+    <a href="/tags/java/" style="font-size: 16.14772407995759px;" class="tag-cloud-link">java</a>
     
-    <a href="/tags/linux/" style="font-size: 14.513955726489652px;" class="tag-cloud-link">linux</a>
+    <a href="/tags/linux/" style="font-size: 14.570758004035719px;" class="tag-cloud-link">linux</a>
     
-    <a href="/tags/orcale/" style="font-size: 16.566340749285512px;" class="tag-cloud-link">orcale</a>
+    <a href="/tags/orcale/" style="font-size: 15.815159599879026px;" class="tag-cloud-link">orcale</a>
     
-    <a href="/tags/postoresql/" style="font-size: 15.354105893516223px;" class="tag-cloud-link">postoresql</a>
+    <a href="/tags/postoresql/" style="font-size: 14.93671711591417px;" class="tag-cloud-link">postoresql</a>
     
 </div>
                 
